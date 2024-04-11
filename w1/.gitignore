@@ -13,6 +13,9 @@ build/
 gradlew
 *.gradle
 *.jar
+*.properties
+*.bat
+*.meta
 
 IntelliJ IDEA
 .idea/modules.xml
