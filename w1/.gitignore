@@ -4,6 +4,16 @@ build/
 !**/src/main//build/
 !**/src/test/**/build/
 
+!web.xml
+!gradle.build
+!*.java
+!*.jsp
+
+*.xml
+gradlew
+*.gradle
+*.jar
+
 IntelliJ IDEA
 .idea/modules.xml
 .idea/jarRepositories.xml
