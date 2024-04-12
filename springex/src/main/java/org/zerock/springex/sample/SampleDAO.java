@@ -1,4 +1,5 @@
 package org.zerock.springex.sample;
 
-public class SampleDAO {
+public interface SampleDAO {
+
 }
