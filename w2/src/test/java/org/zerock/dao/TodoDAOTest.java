@@ -8,7 +8,7 @@ import org.zerock.w2.domain.TodoVO;
 import java.time.LocalDate;
 import java.util.List;
 
-public class TodoDaoTest {
+public class TodoDAOTest {
     private TodoDAO todoDAO;
 
 

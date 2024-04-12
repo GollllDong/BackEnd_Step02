@@ -22,6 +22,6 @@ public class LogoutController extends HttpServlet {
         session.removeAttribute("loginInfo");
         session.invalidate();
 
-        resp.sendRedirect("/");
+        resp.sendRedirect("/login");
     }
 }

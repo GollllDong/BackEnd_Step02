@@ -38,7 +38,7 @@ public class LoginCheckFilter  implements Filter {
         Cookie cookie = findCookie(req.getCookies(), "remember-me");
 
         // 세션에도 없고 쿠키도 없다면 그냥 로그인으로
-        if(cookie != null) {
+        if(cookie == null) {
             resp.sendRedirect("/login");
             return;
         }
