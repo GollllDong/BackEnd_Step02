@@ -49,7 +49,7 @@ public class TodoRegisterController extends HttpServlet {
 
         /* 로그인 정보 유무에 따른 register.jsp 이동 여부 결정 --- end */
 
-        req.getRequestDispatcher("/WEB-INF/todo/register.jsp").forward(req, resp);
+//        req.getRequestDispatcher("/WEB-INF/todo/register.jsp").forward(req, resp);
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

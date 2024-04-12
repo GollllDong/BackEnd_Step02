@@ -15,11 +15,10 @@ import java.io.IOException;
 public class LogoutController extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.info("log out........");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("log Post......");
 
         HttpSession session = req.getSession();
-
         session.removeAttribute("loginInfo");
         session.invalidate();
 

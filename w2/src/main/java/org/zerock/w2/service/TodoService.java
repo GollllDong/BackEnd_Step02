@@ -50,7 +50,7 @@ public enum TodoService {
     }
     public void remove(Long tno) throws Exception {
         log.info("tno : "+tno);
-        dao.deleteOnew(tno);
+        dao.deleteOne(tno);
     }
     public void modify(TodoDTO todoDTO) throws Exception {
         log.info("todoDTO : " + todoDTO);

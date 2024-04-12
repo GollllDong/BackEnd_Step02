@@ -1,6 +1,5 @@
 package org.zerock.w2.filter;
 
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.*;
@@ -13,12 +12,12 @@ import java.io.IOException;
 public class UTF8Filter implements Filter {
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        log.info("UTF8 filter....");
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        log.info("UTF8 filter.........");
 
-        HttpServletRequest req = (HttpServletRequest)request;
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
         req.setCharacterEncoding("UTF-8");
 
-        chain.doFilter(request, response);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 }
