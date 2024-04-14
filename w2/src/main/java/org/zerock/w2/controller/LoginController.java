@@ -49,7 +49,7 @@ public class LoginController extends HttpServlet {
                 // loginInfo를 사용할 memberDTO에 uuid저장
                 memberDTO.setUuid(uuid);
 
-                // remember-me라는 이름의 쿠키으 새로 생성
+                // remember-me라는 이름의 쿠키를 새로 생성
                 Cookie rememberCookie = new Cookie("remember-me",uuid);
                 rememberCookie.setMaxAge(60*60*24*7);   // 쿠키의 유효기간은 7일
                 rememberCookie.setPath("/");
