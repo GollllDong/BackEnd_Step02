@@ -1,6 +1,8 @@
 package org.zerock.springex.dto;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -17,6 +19,8 @@ dtoList만 할일 페이지 업무일때는 TodoDTO
         쇼핑 구매 업무일 때는 OrderDTO 등의 list가 필요하므로
         Generic으로 만들면 1번 만들어놓고 재사용이 가능하다.
 * */
+@Getter
+@ToString
 public class PageResponseDTO<E> {   // 향후 확장성(다른 테이블)까지 접근할 수 있게 만드는거, 페이지를 응답할때 사용하는거
 
     private int page;       // 현재 페이지
@@ -44,29 +48,29 @@ public class PageResponseDTO<E> {   // 향후 확장성(다른 테이블)까지 
         // end는 현재 보여지는 pagination의 끝 번호
         // 10은 pagionation 범위 갯수이다.
         // 10은 pagination의 범위이다.
-        this.end = (int)Math.ceil((this.total / 10)) * 10;
+        this.end = (int)(Math.ceil(this.page / 10.0)) * 10;
 
         // start는 현재 보여지는 pagination의 시작번호
         // 9는 pagination 범위 -1
         this.start = this.end - 9;
 
         // pagination의 전체 범위 가장 끝 번호
-        int last = (int)(Math.ceil(total/(double)size));
+        int last = (int)(Math.ceil((total/(double)size)));
 
         /* 위에서 end계산은 10단위로 무조건 맞춘 것이기 때문에
-        * 실제 마지막 페이지 번호와 확인해서
-        * 마지막 페이지인 경우에는 end > last보다 크게 되므로
-        * end = last로 해줘야
-        * 마지막 페이지인 경우 pagination이 알맞게 나오게 된다.
-        *
-        * 예를 들어 last가 15일 때
-        * pagination은 11 12 13 14 15 16 17 18 19 20으로 보여지고
-        * end는 20인데,
-        * 실제는 15까지가 마지막 번호이므로
-        * end를 15로 바꾸고
-        * pagination도 11 12 13 14 15로 변경되도록 하기 위해 이렇게 처리한다.
-        * */
-        this.end = this.end > last ? last : this.end;
+         * 실제 마지막 페이지 번호와 확인해서
+         * 마지막 페이지인 경우에는 end > last보다 크게 되므로
+         * end = last로 해줘야
+         * 마지막 페이지인 경우 pagination이 알맞게 나오게 된다.
+         *
+         * 예를 들어 last가 15일 때
+         * pagination은 11 12 13 14 15 16 17 18 19 20으로 보여지고
+         * end는 20인데,
+         * 실제는 15까지가 마지막 번호이므로
+         * end를 15로 바꾸고
+         * pagination도 11 12 13 14 15로 변경되도록 하기 위해 이렇게 처리한다.
+         * */
+        this.end = end > last ? last : end;
 
         // 1~10 pagination이 아니고, 그 이상이라는 의미으로 이전 페이지가 존재
         this.prev = this.start > 1;
