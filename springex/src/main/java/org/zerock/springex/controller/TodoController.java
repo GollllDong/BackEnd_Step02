@@ -44,7 +44,7 @@ public class TodoController {
         if(bindingResult.hasErrors()){
             log.info("has errors....");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            return "/todo/register";
+            return "redirect:/todo/register";
         }
 
         log.info(todoDTO);
