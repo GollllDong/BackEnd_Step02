@@ -25,7 +25,7 @@ public class BoardRepositoryTests {
                     .writer("user" + (i%10))
                     .build();
 
-            Board result = boardRepository.save(board);
+            Board result = boardRepository.save(board); // save에서 sql의 insert, update문을 자동으로 생성해서 실행해준다.
             log.info("BNO : " + result.getBno());
         });
     }
@@ -34,9 +34,9 @@ public class BoardRepositoryTests {
     public void testSelect() {
         Long bno = 100L;
 
-        Optional<Board> result = boardRepository.findById(bno);
+        Optional<Board> result = boardRepository.findById(bno); // Optional : 안정적으로 처리하고 싶을 때
 
-        Board board = result.orElseThrow();
+        Board board = result.orElseThrow();     // orElseThrow() : 예외처리를 할때
 
         log.info(board);
     }
