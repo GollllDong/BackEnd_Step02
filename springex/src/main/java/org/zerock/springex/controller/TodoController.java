@@ -17,10 +17,10 @@ import org.zerock.springex.service.TodoService;
 import javax.naming.Binding;
 import javax.validation.Valid;
 
-@Controller
-@RequestMapping("/todo")
-@Log4j2
-@RequiredArgsConstructor
+@Controller                     // 컨트롤러 역할
+@RequestMapping("/todo")      // todo라는 경로로 들어올 경우
+@Log4j2                         // 롬복 라이브러리를 사용(getter,setter,toString..)
+@RequiredArgsConstructor        // final로 선언된 객체를 root-context.xml에 선언해놓은 빈 객체로 만들어준다.
 public class TodoController {
 
     private final TodoService todoService;
