@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(value = {AuditingEntityListener.class})
 @Getter
-public class BaseEntity {
+abstract class BaseEntity {
 
     // 데이터가 새로 생성되었을 때 시간 정보 저장
     // 수정할 때는 갱신하지 말라
