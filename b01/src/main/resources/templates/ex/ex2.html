@@ -5,22 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-    <div th:text="${list}"></div>
-    <div th:text="${map}"></div>
-    <div th:text="${dto}"></div>
+<div th:text="${list}"></div>
+<div th:text="${map}"></div>
+<div th:text="${dto}"></div>
 
-    <script th:inline="javascript">
+<script th:inline="javascript">
 
-        const list = [[${list}]]
+    const list = [[${list}]]
 
-        const map = [[${map}]]
+    const map = [[${map}]]
 
-        const dto = [[${dto}]]
+    const dto = [[${dto}]]
 
-        console.log(list)
-        console.log(map)
-        console.log(dto)
+    console.log(list)
+    console.log(map)
+    console.log(dto)
 
-    </script>
+</script>
+
 </body>
 </html>
