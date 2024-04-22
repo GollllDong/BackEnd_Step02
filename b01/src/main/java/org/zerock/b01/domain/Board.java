@@ -9,7 +9,7 @@ import javax.persistence.*;
 * */
 
 // 이 클래스의 정보를 가지고 자동으로 Board Table을 생성할거야
-@Entity
+@Entity     // JPA를 사용하여 데이터베이스와 연동하겠다.
 @Getter
 @Builder
 @AllArgsConstructor
@@ -22,11 +22,13 @@ public class Board extends BaseEntity {
     는 Mysql/MariaDB에서 auto_increment 속성부여
     * */
 
-    @Id
+    @Id     // 해당 필드가 엔티티의 주키(primary key)이다.
+
+    // auto_increment 속성을 부여한다.
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bno;
 
-    @Column(length = 500, nullable = false)
+    @Column(length = 500, nullable = false)     // 데이터베이스의 컬럼의 길이와 null 허용 여부 설정
     private String title;
 
     @Column(length = 2000, nullable = false)
