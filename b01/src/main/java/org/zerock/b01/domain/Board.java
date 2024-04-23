@@ -23,9 +23,7 @@ public class Board extends BaseEntity {
     * */
 
     @Id     // 해당 필드가 엔티티의 주키(primary key)이다.
-
-    // auto_increment 속성을 부여한다.
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)         // auto_increment 속성을 부여한다.
     private Long bno;
 
     @Column(length = 500, nullable = false)     // 데이터베이스의 컬럼의 길이와 null 허용 여부 설정
