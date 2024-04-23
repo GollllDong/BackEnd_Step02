@@ -34,8 +34,7 @@ public class ReplyRepositoryTests {
                 .build();
         replyRepository.save(reply);
     }
-//  원래 에러가 뜨면 안 돼 그냥 이상한 ㅓㄱ야
-    // 저거로 해서 뜨는거야 Gradle로 하면 또 안 떠 이상해
+    // 실행시 Build and run 설정이 인텔리제이로 되있으면 오류가 발생할 수 있다.
     @Transactional
     @Test
     public void testBoardReplies() {
