@@ -5,6 +5,20 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity     // JPA에 의해 코드를 확인해서 Table로 생성된다.
+/*
+ @Table 테이블에 구체적인 이름을 부여할 때 사용
+ 그리고 fk에 index를 만들어 주었다.
+ pk는 자동으로 index가 생성되어 있다.
+ 그런데 fk는 자동으로 index가 생성되어 있지 않으므로
+ join을 해서 특정 검색을 하게 되면
+ 검색 속도는 index가 없는 fk에 맞춰지게 된다.
+
+ 그러므로 fk를 선언하면 나중에 join을 통한 검색을 할 때
+ 속도를 향상시키기 위해 일반적으로 fk에 index를 설정한다.
+ */
+@Table(name = "Reply", indexes = {
+        @Index(name = "idx_reply_board_bno", columnList = "board_bno")
+})
 @Getter
 @Builder
 @AllArgsConstructor
