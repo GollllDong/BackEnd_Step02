@@ -27,7 +27,7 @@ public class ReplyRepositoryTests {
 
         Board board = Board.builder().bno(bno).build();
 
-        Reply reply = Reply.builder()
+        Reply reply = Reply.builder()   // 부모꺼를 insert로 자동으로 가져옴
                 .board(board)
                 .replyText("댓글...")
                 .replyText("replyer1")
@@ -35,7 +35,7 @@ public class ReplyRepositoryTests {
         replyRepository.save(reply);
     }
     // 실행시 Build and run 설정이 인텔리제이로 되있으면 오류가 발생할 수 있다.
-    @Transactional
+    @Transactional      // 밑의 로직이 종료될 때까지 커넥션이 유지된다.    -> 롤백 특성? 존재?
     @Test
     public void testBoardReplies() {
 

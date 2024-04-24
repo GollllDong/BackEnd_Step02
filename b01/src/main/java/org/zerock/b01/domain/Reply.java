@@ -49,9 +49,14 @@ public class Reply extends BaseEntity{
 
     * */
     @ManyToOne(fetch = FetchType.LAZY)
+//    @ManyToOne(fetch = FetchType.EAGER)
     private Board board;
 
     private String replyText;
 
     private String replayer;
+
+    public void changeText(String text) {
+        this.replyText = text;
+    }
 }

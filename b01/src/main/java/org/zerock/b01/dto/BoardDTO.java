@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class BoardDTO {
 
     private Long bno;
+    private Long rno;
 
     @NotEmpty
     @Size(min = 3, max = 100)
