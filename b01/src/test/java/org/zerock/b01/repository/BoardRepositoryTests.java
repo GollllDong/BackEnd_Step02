@@ -8,11 +8,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.b01.domain.Board;
+import org.zerock.b01.domain.BoardImage;
 import org.zerock.b01.dto.BoardListReplyCountDTO;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -77,7 +80,7 @@ public class BoardRepositoryTests {
 
         // 페이징할 정보를 생성해서 Pageable 객체에 담아준다.
         // 첫번째 페이지, 10개씩, bno를 기준으로 정렬하여 역순(최신)으로 가져와라
-        Pageable pageable = PageRequest.of(2, 10, Sort.by("bno").descending());
+        Pageable pageable = PageRequest.of(1, 10, Sort.by("bno").descending());
         // 페이징에 필요한 정보를 얻어옴
         Page<Board> result = boardRepository.findAll(pageable);
 
@@ -171,5 +174,36 @@ public class BoardRepositoryTests {
         //prev next
         log.info(result.hasPrevious() + ": " + result.hasNext());
         result.getContent().forEach(board -> log.info(board));
+    }
+
+    @Test
+    public void testInsertWithImages() {
+
+        Board board = Board.builder()
+                .title("Image Test")
+                .content("첨부파일 테스트")
+                .writer("tester")
+                .build();
+
+        for(int i=0; i<3; i++) {
+
+            board.addImage(UUID.randomUUID().toString(), "file"+i+".jpg");
+        }
+        boardRepository.save(board);
+    }
+
+//    @Transactional
+    @Test
+    public void testReadWithImages() {
+
+        Optional<Board> result = boardRepository.findByIdWithImages(1L);
+
+        Board board = result.orElseThrow();
+
+        log.info(board);
+        log.info("-----------------");
+        for(BoardImage boardImage : board.getImageSet()) {
+            log.info(boardImage);
+        }
     }
 }
