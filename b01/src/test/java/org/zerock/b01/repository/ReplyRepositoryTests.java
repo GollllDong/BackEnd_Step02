@@ -23,14 +23,14 @@ public class ReplyRepositoryTests {
     public void testInsert() {
 
         // 실제 DB에 있는 bno
-        Long bno = 100L;
+        Long bno = 1L;
 
         Board board = Board.builder().bno(bno).build();
 
         Reply reply = Reply.builder()   // 부모꺼를 insert로 자동으로 가져옴
                 .board(board)
                 .replyText("댓글...")
-                .replyText("replyer1")
+                .replayer("replyer1")
                 .build();
         replyRepository.save(reply);
     }
@@ -44,6 +44,18 @@ public class ReplyRepositoryTests {
         Pageable pageable = PageRequest.of(0, 10, Sort.by("rno").descending());
 
         Page<Reply> result = replyRepository.listOfBoard(bno, pageable);
+
+        result.getContent().forEach(reply -> {
+            log.info(reply);
+        });
+    }
+
+    @Test
+    public void testReplyTextAndPlayer() {
+
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("rno").descending());
+
+        Page<Reply> result = replyRepository.findByReplyTextAndReplayer("댓글....", "replyer1", pageable);
 
         result.getContent().forEach(reply -> {
             log.info(reply);
