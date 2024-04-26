@@ -220,24 +220,54 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
 
                 switch (type) {
                     case "t" :
+                        // OR board.title LIKE '$:keyword%';
                         booleanBuilder.or(board.title.contains(keyword));
                         break;
+
+                        // OR board.content LIKE '$:keyword%'
                     case "c" :
                         booleanBuilder.or(board.content.contains(keyword));
                         break;
+
+                    // OR board.writer LIKE '$:keyword%';
                     case "w" :
                         booleanBuilder.or(board.writer.contains(keyword));
                         break;
                 }
             }
             boardJPQLQuery.where(booleanBuilder);
+            /*
+            * WHERE (
+            * board.title LIKE '$:keyword%'
+            * OR
+            * board.content LIKE '$:keyword%'
+            * OR
+            * board.writer LIKE '$:keyword%';*/
         }
 
+        // GROUP BY board.bno,...
         boardJPQLQuery.groupBy(board);
 
+        // ORDER BY limit :skipRow, :getRows
         getQuerydsl().applyPagination(pageable, boardJPQLQuery);
 
+        // SELECT board.bno, ...., COUNT(reply)
         JPQLQuery<Tuple> tupleJPQLQuery = boardJPQLQuery.select(board, reply.countDistinct());
+
+        /*
+        * SELECT board.bno, ...., COUNT(reply)
+        *  FROM board
+        *  LEFT OUTER JOIN reply ON reply.bno = board.bno
+        *  WHERE (
+            board.title LIKE '$:keyword%'
+            OR
+            board.content LIKE '$:keyword%'
+            OR
+            board.writer LIKE '$:keyword%'
+            )
+           GROUP BY board.bno,...
+           ORDER BY limit :skipRow, :getRows;
+            */
 
         List<Tuple> tupleList = tupleJPQLQuery.fetch();
 
