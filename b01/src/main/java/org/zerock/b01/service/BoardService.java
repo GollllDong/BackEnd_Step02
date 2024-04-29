@@ -41,7 +41,7 @@ public interface BoardService {
     *
     * default 메서드는 반드시 자식 구현 객체에서만 사용할 수 있다.
     * */
-    default Board dtoEntity(BoardDTO boardDTO) {
+    default Board dtoToEntity(BoardDTO boardDTO) {
         Board board = Board.builder()
                 .bno(boardDTO.getBno())
                 .title(boardDTO.getTitle())
@@ -49,16 +49,17 @@ public interface BoardService {
                 .writer(boardDTO.getWriter())
                 .build();
 
-        if(boardDTO.getWriter() != null) {
+        if(boardDTO.getFileNames() != null){
             boardDTO.getFileNames().forEach(fileName -> {
                 String[] arr = fileName.split("_");
                 board.addImage(arr[0], arr[1]);
             });
         }
+
         return board;
     }
 
-    default BoardDTO entityDto(Board board) {
+    default BoardDTO entityToDTO(Board board) {
 
         BoardDTO boardDTO = BoardDTO.builder()
                 .bno(board.getBno())
@@ -69,9 +70,9 @@ public interface BoardService {
                 .modDate(board.getModDate())
                 .build();
 
-        List<String> fileNames =
-                board.getImageSet().stream().sorted().map(boardImage ->
-                        boardImage.getUuid()+"_"+boardImage.getFileName()).collect(Collectors.toList());
+        List<String> fileNames = board.getImageSet().stream().sorted().map(
+                        boardImage -> boardImage.getUuid() + "_" + boardImage.getFileName())
+                .collect(Collectors.toList());
 
         boardDTO.setFileNames(fileNames);
 

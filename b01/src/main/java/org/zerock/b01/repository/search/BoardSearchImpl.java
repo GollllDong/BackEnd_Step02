@@ -280,7 +280,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
                     .bno(board1.getBno())
                     .title(board1.getTitle())
                     .writer(board1.getWriter())
-                    .regdate(board1.getRegDate())
+                    .regDate(board1.getRegDate())
                     .replyCount(replyCount)
                     .build();
 

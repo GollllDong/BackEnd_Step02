@@ -46,7 +46,7 @@ public class BoardRepositoryTests {
 
     @Test
     public void testSelect() {
-        Long bno = 100L;
+        Long bno = 15L;
 
         Optional<Board> result = boardRepository.findById(bno); // Optional : 안정적으로 처리하고 싶을 때
 
